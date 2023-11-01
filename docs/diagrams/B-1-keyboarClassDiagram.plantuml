@@ -1,0 +1,3 @@
+class Teclado
+class Tecla
+Teclado "1" o-down- "105...*" Tecla

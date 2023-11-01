@@ -1,0 +1,8 @@
+class Persona
+class Empleado
+class Profesor
+class Estudiante
+
+Persona <|-down- Empleado
+Persona <|-down- Estudiante
+Persona <|-down- Profesor

@@ -1,0 +1,6 @@
+class DiscoDuro as "Disco Duro"
+class Pistas
+class Sectores 
+
+DiscoDuro *- "*" Pistas
+Pistas *- "*" Sectores

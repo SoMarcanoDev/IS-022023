@@ -1,0 +1,73 @@
+@startuml
+object "Venezuela:Equipo" as Equipo1 {
+    nombre = Venezuela
+    registro = 46
+}
+
+object "Colombia:Equipo" as Equipo2 {
+    nombre = Colombia
+    registro = 35
+}
+
+object ":juego" as juego {
+    localidad = Santiago Chile 
+    puntaje = 1-2
+}
+
+object ":Capitan" as Capitan1 {
+    nombre = Ronald Fayola
+    telefono = +58 4444444
+    direccion = Maracay
+    numero = 1
+    posicion = delantero izquierdo
+}
+
+object ":Capitan" as Capitan2 {
+    nombre = Liberman Agámez
+    telefono = +57 4444444
+    direccion = Cartagena
+    numero = 2
+    posicion = delantero centro
+}
+
+object ":Entrenador" as Entrenador1 {
+    nombre = Ronald Sarti
+    telefono = +58 5555555
+    direccion = La Guaira
+    nivel de acreditacion = altisimo 
+    años de experiencia = 8
+}
+
+object ":Entrenador" as Entrenador2 {
+    nombre = Antonio Rizola
+    telefono = +57 5555555
+    direccion = Medellin
+    nivel de acreditacion = alto
+    años de experiencia = 10
+}
+
+object ":Jugador" as Jugador1{
+    nombre = Edson Valencia
+    telefono = +58 6666666
+    direccion = Barinas
+    numero = 3
+    posicion = zaguero derecho
+}
+
+object ":Jugador" as Jugador2{
+    nombre = Ronald Jiménez
+    telefono = +57 6666666 
+    direccion = Bogota
+    numero = 4
+    posicion = zaguero izquierdo
+}
+
+Equipo1 -up- Entrenador1
+Equipo1 o-left- Capitan1
+Equipo1 o-right- Jugador1
+Equipo2 -down- Entrenador2
+Equipo2 o-left- Capitan2
+Equipo2 o-right- Jugador2
+Equipo1 -- Equipo2
+(Equipo1, Equipo2) .. juego :participan en
+@enduml

@@ -1,0 +1,30 @@
+class Equipo{
+    -nombre
+    -registro
+}
+class Jugador {
+    -numero
+    -posicion
+}
+class Capitan 
+class Juego {
+    -localidad
+    -puntuacion
+}
+class Entrenador {
+    -nivel de acreditacion
+    -años de experiencia
+}
+class Persona {
+    -telefono
+    -nombre
+    -direccion
+}
+
+Equipo o-down- "6...20" Jugador
+Equipo - Capitan :tiene
+Equipo -left- Juego :participa
+Equipo "1...*" -- Entrenador
+Jugador <|-up- Capitan
+Persona <|-up- Jugador
+Persona <|-up- Entrenador
