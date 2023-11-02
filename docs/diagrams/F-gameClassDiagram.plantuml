@@ -1,3 +1,4 @@
+@startuml
 class Equipo{
     -nombre
     -registro
@@ -23,8 +24,9 @@ class Persona {
 
 Equipo o-down- "6...20" Jugador
 Equipo - Capitan :tiene
-Equipo -left- Juego :participa
+Equipo "2"-left-"*" Juego :participa
 Equipo "1...*" -- Entrenador
 Jugador <|-up- Capitan
 Persona <|-up- Jugador
 Persona <|-up- Entrenador
+@enduml

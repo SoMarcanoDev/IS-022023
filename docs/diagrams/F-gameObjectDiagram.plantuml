@@ -68,6 +68,6 @@ Equipo1 o-right- Jugador1
 Equipo2 -down- Entrenador2
 Equipo2 o-left- Capitan2
 Equipo2 o-right- Jugador2
-Equipo1 -- Equipo2
-(Equipo1, Equipo2) .. juego :participan en
+Equipo1 -down- juego :participa en
+Equipo2 -up- juego :participa en
 @enduml
