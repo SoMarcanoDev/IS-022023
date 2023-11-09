@@ -1,0 +1,12 @@
+participant miLista
+participant Item
+
+activate miLista
+miLista -> miLista: 1:getItem()
+
+miLista -> Item: 2:hacerAlgo()
+activate Item
+
+Item --> miLista: done
+
+footer (miLista.getItem()).hacerAlgo()

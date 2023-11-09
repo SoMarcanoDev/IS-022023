@@ -1,0 +1,18 @@
+@startuml
+state "iniciar pedido" as State1
+state "pedido colocado" as StateM
+state "pedido pagado" as StateN
+state  StateB <<choice>>
+state "pedido realizado" as StateV
+
+[*] -d-> State1
+State1 -d-> StateM: Encargar producto
+StateM -> StateM: Validar pedido
+StateM -> StateM: Cobrar pago
+StateM -d-> StateN: Pagar
+StateN -> StateB: Obtener producto
+StateB -> StateV: [urgente] Enviar urgente
+StateB -> StateV: [no urgente] Enviar ordinario
+StateV -d-> [*]: Recibir factura
+
+@enduml

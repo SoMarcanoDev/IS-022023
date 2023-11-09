@@ -1,0 +1,12 @@
+participant lista
+participant textField
+
+activate lista
+lista -> textField: add()
+
+activate textField
+textField -> textField: getText()
+
+textField --> lista: texto
+
+footer lista.add(textField.getText())

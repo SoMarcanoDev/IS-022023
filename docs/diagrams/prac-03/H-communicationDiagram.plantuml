@@ -1,0 +1,37 @@
+@startuml
+skinparam noteBackgroundColor transparent
+skinparam noteBorderColor transparent
+
+object ":Registro" as registro
+object "venta:Venta" as venta
+object "catalogo:Catalogo" as catalogo 
+object "listaVenta:List" as lista
+object ":LineaVenta" as linea
+
+
+note left of registro
+: introducirArticulo(id, cant)
+end note
+
+registro -r-> catalogo
+note on link
+1: espec = getEspecificacion(id)
+end note
+
+registro -d-> venta
+note on link
+2:crearLineaVenta(espec, cant)
+end note
+
+venta -d-> linea
+note on link
+            <<create>>
+3: LineaVenta(espec, cant)
+end note
+
+venta -r-> lista
+note on link
+4: añadir(LineaVenta)
+end note
+
+@enduml

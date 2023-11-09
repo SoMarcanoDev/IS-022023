@@ -1,0 +1,14 @@
+participant miColeccion
+participant iEstudiante
+
+activate miColeccion
+miColeccion -> miColeccion: 1:getEstudiante(i)
+
+miColeccion -> iEstudiante: 2:getNombre()
+activate iEstudiante
+
+iEstudiante --> miColeccion: 3:Nombre
+
+
+
+footer miColeccion.getEstudiante(i).getNombre()
