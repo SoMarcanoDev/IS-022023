@@ -1,0 +1,9 @@
+@startuml
+
+class Caracteristica 
+class Criterio
+class ElementoClasificado as "Elemento Clasificado"
+
+Criterio "*" -left- Caracteristica : Fundamenta
+Caracteristica - ElementoClasificado : Genera
+ElementoClasificado ..> Criterio

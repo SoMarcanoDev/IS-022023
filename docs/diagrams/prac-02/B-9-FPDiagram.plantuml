@@ -1,0 +1,14 @@
+@startuml
+
+class FP
+class UFC
+class TCF
+class Fi {
+    valor
+}
+
+TCF ..> "14" Fi: subfactores
+FP -down- UFC: 1er operando
+FP - TCF: 2do operando
+
+@enduml

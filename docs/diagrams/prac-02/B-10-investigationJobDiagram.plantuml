@@ -1,0 +1,19 @@
+@startuml
+
+class TrabajoInvestigacion as "Trabajo de Investigacion"
+class TEG
+class TGM
+class Profesor
+class EstudiantePostgrado as "Estudiante de Postgrado"
+class EstudiantePregrado as "Estudiante de Pregrado"
+class Estudiante
+
+TrabajoInvestigacion <|-down- TEG
+TrabajoInvestigacion <|-down- TGM
+TrabajoInvestigacion "*" -left- "1...2" Profesor : dirige
+EstudiantePostgrado -up- TGM : realiza
+EstudiantePregrado "1..2" -up- TEG : realiza
+Estudiante <|-up- EstudiantePostgrado
+Estudiante <|-up- EstudiantePregrado
+
+@enduml

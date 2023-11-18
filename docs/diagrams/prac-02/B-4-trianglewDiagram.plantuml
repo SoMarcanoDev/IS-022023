@@ -1,0 +1,10 @@
+@startuml
+
+class Poligono
+class Triangulo
+class Lados
+
+Triangulo -|> Poligono
+Triangulo *-down- "3" Lados
+
+@enduml

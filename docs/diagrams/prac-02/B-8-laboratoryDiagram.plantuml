@@ -1,0 +1,13 @@
+@startuml
+
+class Laboratorio 
+class Equipo
+class LaboratorioNuclear as "Laboratorio Nuclear"
+class EquipoNuclear as "Equipo Nuclear"
+class EquipoNoNuclear as "Equipo No Nuclear"
+
+Laboratorio <|-down- LaboratorioNuclear
+Laboratorio - "*" EquipoNoNuclear : tiene
+Equipo <|-left- EquipoNuclear
+Equipo <|-up- EquipoNoNuclear
+LaboratorioNuclear - EquipoNuclear : tiene

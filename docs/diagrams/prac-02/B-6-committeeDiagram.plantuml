@@ -1,0 +1,9 @@
+@startuml
+
+class Comite
+class Persona
+class Coordinador
+
+Persona <|-down- Coordinador
+Coordinador -right- "*" Comite
+Persona "2...*" -right-* "0...*" Comite

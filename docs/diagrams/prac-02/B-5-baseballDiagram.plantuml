@@ -1,0 +1,10 @@
+@startuml
+
+class Equipo
+class Jugadores
+class Estadio
+
+Equipo *-up- Jugadores
+Equipo <- Estadio : homeclub
+
+@enduml
