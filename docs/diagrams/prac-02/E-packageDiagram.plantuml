@@ -1,0 +1,50 @@
+@startuml
+
+package top
+package Threads
+package controllers
+package utils
+package samplers
+package Visualizers
+
+top .down.> Visualizers
+top .down.> controllers
+
+note right of top
+    1. ¿Qué significa que el paquete “top” tiene una dependencia con el paquete “controllers”?
+    Que al menos una clase del paquete “top” utiliza métodos de una clase en el paquete
+    “controllers”
+end note
+
+top .down.> Threads
+Visualizers .down.> samplers
+Visualizers ..> utils
+controllers ..> samplers
+controllers ..> utils
+controllers .right.> Threads
+Threads ..> samplers
+Threads .left.> controllers
+note right of Threads
+    2. ¿Con cuántos paquetes tiene dependencias el 
+    paquete “Threads”? ¿Cuántas dependencias son de 
+    entrada y cuántas de salida? ¿Si se hace un 
+    cambio en alguna de las clases del paquete “Threads” 
+    qué podría suceder?
+    - 6, 3 de entrada y 3 de salida.
+    - el paquete esta fuertemente acoplado con sus vecinos,
+    un cambio en sus clases afectara a los vecinos
+end note
+Threads .down.> utils
+samplers .right.> utils
+utils .up.> Threads
+utils .left.> samplers
+
+note bottom of utils
+    3. Hablando en términos de modularidad, ¿este diagrama 
+    muestra un código con bajo o alto acoplamiento entre los 
+    paquetes? ¿Esto es bueno o malo?
+    alto acoplamiento, esto es malo pues puede generar codigo 
+    dificil de mantener
+end note
+
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+
+object ":Poligono" as P
+object ":Punto" as P1{
+    cord_x = 0
+    cord_y = 0
+}
+object ":Punto" as P2{
+    cord_x = 1
+    cord_y = 0
+}
+object ":Punto" as P3{
+    cord_x = 1
+    cord_y = 0
+}
+object ":Punto" as P4{
+    cord_x = 1
+    cord_y = 1
+}
+
+P -left- P1
+P -up- P2
+P -right- P3
+P -down- P4
+
+@enduml

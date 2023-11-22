@@ -1,0 +1,41 @@
+@startuml
+
+object ":Variable" as V1{
+    nombre = x
+}
+object ":Variable" as V2{
+    nombre = y
+}
+object ":Constante" as C1{
+    valor = 2
+}
+object ":Constante" as C2{
+    valor = 3
+}
+object "E1:Expresion" as E1{
+    operador_binario = /
+}
+object "E2:Expresion" as E2{
+    operador_binario = +
+}
+object "E3:Expresion" as E3{
+    operador_binario = +
+}
+object "E4:Expresion" as E4{
+    operador_binario = /
+}
+object "E5:Expresion" as E5{
+    operador_binario = /
+}
+
+E2 -up-o E1
+E3 -up-o E1
+V1 -up-o E2
+E4 -up-o E2
+E5 -up-o E3
+V2 -up-o E3
+V2 -up-o E4
+C1 -up-o E4
+V1 -up-o E5
+C2 -up-o E5
+@enduml
