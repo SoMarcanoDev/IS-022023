@@ -1,0 +1,20 @@
+@startuml bCommunicationDiagram
+skinparam NoteBackgroundColor transparent
+skinparam NoteBorderColor transparent
+
+object ": ClienteE1" as cliente
+object "p : PruebaE1" as prueba
+
+cliente -r-> prueba
+note on link
+    1:create
+    2:f()
+end note
+
+prueba -> prueba
+note on link
+    3:g()
+    4:h()
+end note
+
+@enduml

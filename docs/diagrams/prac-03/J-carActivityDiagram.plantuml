@@ -1,0 +1,27 @@
+@startuml carActivityDiagram
+
+start
+while (avanzar?) is (no)
+    :Poner Retroceso;
+    :Poner Neutro;
+endwhile (yes)
+    :Poner Primera;
+    if (adelantar?) then (yes)
+        :Cambiar;
+        if (avanzar?) then (yes)
+            if (llego a tercera?) then (yes)
+            else (no)
+                :Cambiar;
+            endif
+        else (no)
+            if (llego a primera?) then (yes)
+                :Poner Neutro;
+            else (no)
+                :Reducir;
+            endif
+        endif
+    else (no)
+        :Poner Neutro;
+    endif
+
+@enduml

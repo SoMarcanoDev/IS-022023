@@ -1,14 +1,21 @@
-participant miColeccion
-participant iEstudiante
+@startuml getNombreEstudiante
+
+participant ": Cliente" as cliente
+participant "miColeccion : Coleccion" as miColeccion
+participant "i : Estudiante" as Estudiante
+
+activate cliente
+cliente -> miColeccion: 1:getEstudiante(i)
 
 activate miColeccion
-miColeccion -> miColeccion: 1:getEstudiante(i)
+miColeccion --> cliente: 1.1:i
+deactivate miColeccion
 
-miColeccion -> iEstudiante: 2:getNombre()
-activate iEstudiante
+cliente -> Estudiante: 2:getNombre()
+activate Estudiante
 
-iEstudiante --> miColeccion: 3:Nombre
-
-
+Estudiante --> cliente: 2.1:Nombre
 
 footer miColeccion.getEstudiante(i).getNombre()
+
+@enduml

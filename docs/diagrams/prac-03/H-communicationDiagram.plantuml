@@ -1,4 +1,4 @@
-@startuml
+@startuml communicationDiagram
 skinparam noteBackgroundColor transparent
 skinparam noteBorderColor transparent
 

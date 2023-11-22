@@ -1,12 +1,20 @@
-participant miLista
-participant Item
+@startuml sequenceDiagram
+
+participant ": Cliente" as cliente
+participant "miLista : Lista" as miLista
+participant "item : Item" as Item
+
+activate cliente
+cliente -> miLista: 1:getItem()
 
 activate miLista
-miLista -> miLista: 1:getItem()
+miLista --> cliente: 1.1:item
+deactivate miLista
 
-miLista -> Item: 2:hacerAlgo()
+cliente -> Item: 2:hacerAlgo()
+
 activate Item
 
-Item --> miLista: done
-
 footer (miLista.getItem()).hacerAlgo()
+
+@enduml

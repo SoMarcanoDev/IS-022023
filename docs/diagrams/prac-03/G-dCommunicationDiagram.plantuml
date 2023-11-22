@@ -1,0 +1,27 @@
+@startuml dCommunicationDiagram
+skinparam NoteBackgroundColor transparent
+skinparam NoteBorderColor transparent
+
+object ": Cliente" as cliente
+object "c : Compra" as compra
+object "f : Fecha" as fecha
+object "l : Lista" as lista
+
+cliente -r-> compra
+note on link
+    1:create
+    2:setCosto(x)
+    4:setFecha(f)
+end note
+
+cliente -d-> fecha
+note on link
+    3:getFecha()
+end note
+
+cliente -l-> lista
+note on link
+    5:add(c)
+end note
+
+@enduml

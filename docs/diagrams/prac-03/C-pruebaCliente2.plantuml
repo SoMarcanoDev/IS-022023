@@ -1,0 +1,14 @@
+@startuml pruebaCliente2
+participant "p : PruebaE2" as PruebaE2 order 2
+participant ": ClienteE2" as ClienteE2 order 1
+
+activate ClienteE2
+activate PruebaE2
+ClienteE2 -> PruebaE2: 1:f()
+
+PruebaE2 -> PruebaE2: 1.1:create
+activate PruebaE2
+PruebaE2 -> PruebaE2: 1.1.1:g()
+PruebaE2 -> PruebaE2: 1.1.2:h()
+
+@enduml

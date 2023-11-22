@@ -1,12 +1,19 @@
-participant lista
-participant textField
+@startuml lista
 
-activate lista
-lista -> textField: add()
+participant ": Cliente" as cliente
+participant "textField : TextField" as textField
+participant "lista : Lista" as lista
+
+activate cliente
+cliente -> textField: 1:getText()
 
 activate textField
-textField -> textField: getText()
+textField --> cliente: 1.1:string
+deactivate textField
 
-textField --> lista: texto
+cliente -> lista: 2:add(string)
+activate lista
 
 footer lista.add(textField.getText())
+
+@enduml

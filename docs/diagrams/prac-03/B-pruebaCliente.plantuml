@@ -1,25 +1,15 @@
-@startuml
-participant PruebaE1 order 2
-participant ClienteE1 order 1
+@startuml pruebaCliente
+participant "p : PruebaE1" as PruebaE1 order 2
+participant ": ClienteE1" as ClienteE1 order 1
 
-
+activate ClienteE1
 create PruebaE1
-ClienteE1 -> PruebaE1:new
+ClienteE1 -> PruebaE1: 1:create
 activate PruebaE1
 
-
-note left of ClienteE1
-    public class PruebaE1{
-    public void f(){ g(); }
-    public void g(){ h(); }
-    public void h(){ System.out.println("Algo"); }
-    }
-    public class ClienteE1 {
-    public static void main(String[] args) {
-    Prueba p = new PruebaE1();
-    p.f();
-    }
-    }
-end note
+ClienteE1 -> PruebaE1: 2:f()
+deactivate ClienteE1
+PruebaE1 -> PruebaE1: 2.1:g()
+PruebaE1 -> PruebaE1: 2.2:h()
 
 @enduml

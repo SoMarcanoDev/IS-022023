@@ -1,0 +1,25 @@
+@startuml carStateDiagram
+hide empty description
+state "Detenido" as stop
+state "Avanzando" as go {    
+    state "Primera" as first
+    state "Segunda" as second
+    state "Tercera" as third
+    
+    [*] -> first: poner 1ra
+    first -> second: cambiar
+    second-> third: cambiar
+    third -> second: reducir
+    second -> first: reducir
+    first -l-> [*]: poner neutro
+}
+state "Retrocediendo" as backing
+
+[*] -> stop
+stop -d-> go: poner 1ra
+go -> stop: poner neutro
+stop -r-> backing: poner retroceso
+backing -> stop: poner neutro
+stop -u-> [*]
+
+@enduml

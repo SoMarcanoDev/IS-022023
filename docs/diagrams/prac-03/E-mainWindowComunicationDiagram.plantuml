@@ -1,0 +1,21 @@
+@startuml mainWindowComunicationDiagram
+skinparam NoteBackgroundColor transparent
+skinparam NoteBorderColor Transparent
+
+object "mainWindow : JFrame" as jFrame
+object ": DataStore" as dataStore
+object "ListeningPort : Socket" as socket
+
+jFrame -r-> dataStore
+note on link
+    1:loadAppSettings()
+end note
+
+jFrame -d-> socket
+note on link
+    2:create
+    3:lisent()
+    4:accept()
+end note
+
+@enduml
