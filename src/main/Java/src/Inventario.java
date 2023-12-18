@@ -29,8 +29,11 @@ class Dispositivo {
 }
 
 public class Inventario {
+    static List<Dispositivo> deviceList;
+    List<String> generalReportList;
+    List<String> ciList;
 
-    static void loadDevices (List<Dispositivo> deviceList) {
+    static void loadDevices () {
         Date date = new Date();
         File inventario = new File("inventario.txt");
         try {
@@ -54,36 +57,21 @@ public class Inventario {
         }
     }
 
-    static void registerDevice(List<Dispositivo> deviceList, Scanner in) {
-        String desc;
-        int ct;
-        float mu;
+    void registerDevice(String desc, String count, String unitPrice, String dateFull, String nf, String ci) {
+        
+        int ct = Integer.valueOf(count);
+        float mu = Float.valueOf(unitPrice);
         Date date = new Date();
-        String nf;
-        String ci;
-
-        System.out.println("Ingrese la descripcion: ");
-        desc = in.nextLine();
-        desc = in.nextLine();
-        System.out.println("Ingrese la cantidad de equipos: ");
-        ct = in.nextInt();
-        System.out.println("Ingrese el precio unitario: ");
-        mu = in.nextFloat();
-        System.out.println("Ingrese la fecha de adquicision: ");
-        date.dd = in.nextInt();
-        date.mm = in.nextInt();
-        date.aaaa = in.nextInt();
-        System.out.println("Ingrese el numero de la factura: ");
-        nf = in.nextLine();
-        nf = in.nextLine();
-        System.out.println("Ingrese la la cedula del profesor encargado: ");
-        ci = in.nextLine();
+        String[] dateParts = dateFull.split("/");
+        date.dd = Integer.valueOf(dateParts[0]);
+        date.mm = Integer.valueOf(dateParts[1]);
+        date.aaaa = Integer.valueOf(dateParts[2]);
 
         Dispositivo device = new Dispositivo(desc, ct, mu, date, nf, ci);
         deviceList.add(device);
     }
 
-    static void saveDevices(List<Dispositivo> deviceList) {
+    void saveDevices() {
         try {
             FileWriter inventoryWriter = new FileWriter("inventario.txt");
             for (int i=0; i < deviceList.size(); i++) {
@@ -101,13 +89,10 @@ public class Inventario {
             
     }
 
-    static void generateReport(List<Dispositivo> deviceList, Scanner in) {
-        System.out.println("Ingrese la cedula del profesor: ");
-        String ci;
-        ci = in.nextLine();
-        ci = in.nextLine();
+    String generateIndividualReport(String ci) {
         int ct = 0;
         float mu = 0;
+        String result;
 
         for (int i=0; i < deviceList.size(); i++) {
 
@@ -117,49 +102,67 @@ public class Inventario {
             }
         }
 
-        System.out.println("Totalizacion: ");
-        System.out.println(ct + " equipos.");
-        System.out.println(mu + " Bs.");
+        result = "<html>Totalizacion: <br/>" + ct + " equipos <br/>" + mu +" Bs. </html>";
+
+        return result;
     }
-        
 
-    public static void main(String[] args) throws Exception {
-        List<Dispositivo> deviceList = new ArrayList<Dispositivo>();
-        loadDevices(deviceList);
+    String generateGeneralReport() {
+        int ct = 0;
+        float mu = 0;
+        String result;
 
-        Scanner sc = new Scanner(System.in);
-        boolean done = false;
-        int option = -1;
-
-        new MainFrame();
-
-        while (!done) {
-            System.out.println("1. Registrar equipo.");
-            System.out.println("2. Generar reporte.");
-            System.out.println("3. Salir.");
-
-            option = sc.nextInt();
-            
-            switch (option) {
-                case 1: {
-                    registerDevice(deviceList, sc);
-                    break;
-                }
-                case 2: {
-                    generateReport(deviceList, sc);
-                    break;
-                }
-                default: {
-                    done = true;
-                    System.out.println("Adios");
-                    break;
-                }
-            }
-            
+        for (int i=0; i < deviceList.size(); i++) {
+            ct = ct + deviceList.get(i).ct;
+            mu = mu + deviceList.get(i).mu;
         }
-        
-        saveDevices(deviceList);
-        
-        sc.close();
+
+        result = "<html>Totalizacion: <br/>" + ct + " equipos <br/>" + mu +" Bs. </html>";
+
+        return result;
     }
+    
+    boolean isNotCount(String ci) {
+        for (int i=0; i < ciList.size(); i++) {
+            if (ci.equals(ciList.get(i))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    void generateGeneralReportList () {
+        ciList = new ArrayList<String>();
+        generalReportList = new ArrayList<String>();
+        int ct = 0;
+        float mu = 0;
+        String space = "                         ";
+        
+
+        for (int i=0; i < deviceList.size(); i++) {
+            if (isNotCount(deviceList.get(i).ci)) {
+                String ci = new String();
+                ci = deviceList.get(i).ci;
+                ciList.add(ci);
+                for (int j = i; j < deviceList.size(); j ++){
+                    if (ci.equals(deviceList.get(j).ci)) {
+                    ct = ct + deviceList.get(j).ct;
+                    mu = mu + deviceList.get(j).mu;
+                    }
+                }
+                String result = space + ci + space + space + ct + space + space + mu;
+                generalReportList.add(result);
+                ct = 0;
+                mu = 0;
+            }
+        }
+
+    }
+
+    Inventario() {
+        deviceList = new ArrayList<Dispositivo>();
+        loadDevices();
+    }
+    
 }

@@ -22,12 +22,15 @@ public class ReportFrame extends JFrame implements ActionListener {
     ButtonGroup group;
     JRadioButton individualButton;
     JRadioButton generalButton;
+    JLabel totalLabel;
     JButton totalButton;
     JTextArea generalReport;
     JScrollPane generalReportScroll;
+    Inventario inventory;
 
-    ReportFrame(MainFrame mainFrame) {
+    ReportFrame(MainFrame mainFrame, Inventario inventory) {
         this.mainFrame = mainFrame;
+        this.inventory = inventory;
 
         typeLabel.setText("Tipo reporte: ");
         typeLabel.setVerticalAlignment(JLabel.TOP);
@@ -57,6 +60,7 @@ public class ReportFrame extends JFrame implements ActionListener {
         totalButton.setFocusable(false);
         totalButton.setBounds(550, 0 , 80, 25);
         totalButton.setFont(new Font(null, Font.PLAIN, 10));
+        totalButton.addActionListener(this);
 
         individualReportPanel = new JPanel();
         individualReportPanel.setBounds(0, 50, 660, 250);
@@ -68,7 +72,7 @@ public class ReportFrame extends JFrame implements ActionListener {
         individualReportPanel.add(totalButton);
 
         generalReport = new JTextArea();
-        generalReport.setText("                         C.I. Responsable                               Cantidad equipos                            Monto total(Bs.)");
+        generalReport.setText("                         C.I. Responsable                         Cantidad equipos                         Monto total(Bs.)");
         generalReport.setEditable(false);
 
         generalReportScroll = new JScrollPane(generalReport);
@@ -82,7 +86,7 @@ public class ReportFrame extends JFrame implements ActionListener {
         // generalReportPanel.add(generalReport);
         generalReportPanel.add(generalReportScroll);
 
-        JLabel totalLabel = new JLabel("<html>Totalizacion: <br/>__ equipos <br/> ________ Bs. </html>");
+        totalLabel = new JLabel("<html>Totalizacion: <br/>__ equipos <br/> ________ Bs. </html>");
         totalLabel.setBounds(30, 300, 100, 75);
 
         continueButton = new JButton();
@@ -118,10 +122,21 @@ public class ReportFrame extends JFrame implements ActionListener {
         if (e.getSource() == individualButton) {
             individualReportPanel.setVisible(true);
             generalReportPanel.setVisible(false);
+            totalLabel.setText("<html>Totalizacion: <br/>__ equipos <br/> ________ Bs. </html>");
         }
         if (e.getSource() == generalButton) {
             individualReportPanel.setVisible(false);
             generalReportPanel.setVisible(true);
+            inventory.generateGeneralReportList();
+
+            for (int i = 0; i < inventory.generalReportList.size(); i++) {
+                generalReport.append("\n" + inventory.generalReportList.get(i));
+            }
+
+            totalLabel.setText(inventory.generateGeneralReport());
+        }
+        if (e.getSource() == totalButton) {
+            totalLabel.setText(inventory.generateIndividualReport(ciTextField.getText()));
         }
     }
 }

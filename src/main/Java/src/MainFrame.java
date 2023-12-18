@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class MainFrame extends JFrame implements ActionListener {
+    Inventario inventory = new Inventario();
     JButton registerData;
     JButton generateReport;
     JButton exit;
@@ -16,6 +17,7 @@ public class MainFrame extends JFrame implements ActionListener {
     JTextField dateTextField;
     JTextField nfTextField;
     JTextField ciTextField;
+
 
     MainFrame() {
         JLabel headerLabel = new JLabel("Ingrese data del equipo: ");
@@ -59,6 +61,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         registerData = new JButton();
         registerData.setBounds(335, 345, 100, 25);
+        registerData.addActionListener(this);
         registerData.setText("Registrar data");
         registerData.setFocusable(false);
         registerData.setFont(new Font(null, Font.PLAIN, 10));
@@ -105,14 +108,14 @@ public class MainFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == generateReport){
+        if (e.getSource() == registerData){
+            inventory.registerDevice(descTextField.getText(), ctTextField.getText(), muTextField.getText(), dateTextField.getText(), nfTextField.getText(), ciTextField.getText());
+        } else if(e.getSource() == generateReport){
             this.setVisible(false);
-            new ReportFrame(this);
+            new ReportFrame(this, inventory);
         } else if (e.getSource() == exit) {
+            inventory.saveDevices();
             System.exit(0);
         }
     }
-
-    
-    
 }
