@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class MainFrame extends JFrame implements ActionListener {
@@ -18,19 +19,18 @@ public class MainFrame extends JFrame implements ActionListener {
     JTextField nfTextField;
     JTextField ciTextField;
 
-
     MainFrame() {
         JLabel headerLabel = new JLabel("Ingrese data del equipo: ");
-        headerLabel.setBounds(10,10,200,25);
+        headerLabel.setBounds(10, 10, 200, 25);
 
         JLabel descLabel = new JLabel("Descripcion: ");
-        descLabel.setBounds(10,50,200,25);
+        descLabel.setBounds(10, 50, 200, 25);
 
         descTextField = new JTextField();
         descTextField.setBounds(100, 50, 525, 25);
 
         JLabel ctLabel = new JLabel("Cantidad: ");
-        ctLabel.setBounds(10,90,100,25);
+        ctLabel.setBounds(10, 90, 100, 25);
 
         ctTextField = new JTextField();
         ctTextField.setBounds(100, 90, 50, 25);
@@ -80,7 +80,6 @@ public class MainFrame extends JFrame implements ActionListener {
         exit.setFocusable(false);
         exit.setFont(new Font(null, Font.PLAIN, 10));
 
-
         this.setTitle("Registro y Control de Equipos en Centro de Investigacion");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -106,10 +105,44 @@ public class MainFrame extends JFrame implements ActionListener {
         this.add(exit);
     }
 
+    boolean areTextFieldsEmpty() {
+        if(descTextField.getText().equals("") || 
+        ctTextField.getText().equals("") || 
+        muTextField.getText().equals("") || 
+        dateTextField.getText().equals("") || 
+        nfTextField.getText().equals("") || 
+        ciTextField.getText().equals("")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    boolean badDate() {
+        String[] dateParts = dateTextField.getText().split("/");
+        if (dateParts.length != 3) {
+            return true;
+        } else if (Integer.valueOf(dateParts[0]) < 1 || Integer.valueOf(dateParts[0]) > 31) {
+            return true;
+        } else if (Integer.valueOf(dateParts[1]) < 1 || Integer.valueOf(dateParts[1]) > 12) {
+            return true;
+        } else if (Integer.valueOf(dateParts[2]) < 1968) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == registerData){
-            inventory.registerDevice(descTextField.getText(), ctTextField.getText(), muTextField.getText(), dateTextField.getText(), nfTextField.getText(), ciTextField.getText());
+            if (areTextFieldsEmpty()){
+                JOptionPane.showMessageDialog(null, "Llene todos los campos", "Bad input", JOptionPane.ERROR_MESSAGE);
+            } else if (badDate()) {
+                JOptionPane.showMessageDialog(null, "Ingrese la fecha en el formato correcto", "Bad input", JOptionPane.ERROR_MESSAGE);
+            } else {
+                inventory.registerDevice(descTextField.getText(), ctTextField.getText(), muTextField.getText(), dateTextField.getText(), nfTextField.getText(), ciTextField.getText());
+            }
         } else if(e.getSource() == generateReport){
             this.setVisible(false);
             new ReportFrame(this, inventory);

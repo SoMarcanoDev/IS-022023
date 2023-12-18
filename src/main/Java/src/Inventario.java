@@ -34,11 +34,11 @@ public class Inventario {
     List<String> ciList;
 
     static void loadDevices () {
-        Date date = new Date();
         File inventario = new File("inventario.txt");
         try {
             Scanner Reader = new Scanner(inventario);
             while (Reader.hasNextLine()) {
+                Date date = new Date();
                 String data = Reader.nextLine();
                 String[] parts = data.split("#");
                 String[] dateParts = parts[3].split("/");
