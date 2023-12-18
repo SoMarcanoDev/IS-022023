@@ -68,7 +68,6 @@ public class ReportFrame extends JFrame implements ActionListener {
         individualReportPanel.add(totalButton);
 
         generalReport = new JTextArea();
-        // generalReport.setBounds(10, 10, 500, 100);
         generalReport.setText("                         C.I. Responsable                               Cantidad equipos                            Monto total(Bs.)");
         generalReport.setEditable(false);
 
